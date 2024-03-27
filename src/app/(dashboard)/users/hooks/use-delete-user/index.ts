@@ -24,6 +24,7 @@ export const useDeleteUser = ({ queryKey }: IProps) => {
         if (old) {
           return {
             ...old,
+            total: old.total - 1,
             data: old.data.filter((user) => user.id !== userId),
           };
         }
