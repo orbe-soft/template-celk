@@ -3,16 +3,18 @@
 import { Button } from "@/components/button";
 import { useParams, useRouter } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import type { IParams } from "./page";
+import { type IParams } from "./page";
 import { normalizeSlug } from "@/utils/normalize-slug";
 import { FormControl } from "../../components/form-control";
 import { Input } from "../../components/input";
 import { useCreateUser } from "../hooks/use-create-user";
 import { useUpdateUser } from "../hooks/use-update-user";
+import { useGetUserById } from "../hooks/use-get-user-by-id";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 const userSchema = z.object({
   firstName: z.string().min(1, "Enter the user's first name"),
@@ -23,25 +25,41 @@ const userSchema = z.object({
 type IUserForm = z.infer<typeof userSchema>;
 
 export function Form() {
+  const router = useRouter();
+
+  const { slug } = useParams<IParams>();
+  const { isEditing, id: userId } = normalizeSlug(slug);
+  const title = isEditing ? "Edit user" : "New user";
+
+  const { mutate: handleCreateUser } = useCreateUser();
+  const { mutate: handleUpdateUser } = useUpdateUser();
+  const { data: user } = useGetUserById({ userId })
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm<IUserForm>({
     mode: "onChange",
     resolver: zodResolver(userSchema),
   });
 
-  const { mutate: handleCreateUser } = useCreateUser();
-  const { mutate: handleUpdateUser } = useUpdateUser();
+  function handleDefaultValues() {
+    if (!user) return
 
-  const router = useRouter();
+    const {
+      firstName,
+      lastName,
+      email,
+    } = user;
 
-  const { slug } = useParams<IParams>();
-
-  const { isEditing, id: userId } = normalizeSlug(slug);
-
-  const title = isEditing ? "Edit user" : "New user";
+    reset({
+      firstName,
+      lastName,
+      email,
+    });
+  }
 
   const onSubmit = (data: IUserForm) => {
     if (userId) {
@@ -59,6 +77,8 @@ export function Form() {
       onSuccess: () => router.replace("/users"),
     });
   };
+
+  useEffect(handleDefaultValues, [reset, user]);
 
   return (
     <>

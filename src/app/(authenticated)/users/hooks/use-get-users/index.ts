@@ -1,20 +1,23 @@
 import { createQuery } from "react-query-kit";
 
-import type { GetUsersParams } from "@/services/users/types";
 import { users } from "@/services/users";
 import { keepPreviousData } from "@tanstack/react-query";
 
-export const useGetUsers = (params: GetUsersParams) => {
+import type { IProps } from './types'
+
+export const useGetUsers = (props: IProps) => {
+  const { page, limit } = props
+
   const query = createQuery({
     queryKey: ["get-users"],
     fetcher: users.get,
     placeholderData: keepPreviousData,
   });
 
-  const queryResponse = query({ variables: params });
+  const queryResponse = query({ variables: { page, limit } });
 
   return {
     ...queryResponse,
-    queryKey: query.getKey(params),
+    queryKey: query.getKey({ page, limit }),
   };
 };

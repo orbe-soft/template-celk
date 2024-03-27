@@ -5,7 +5,7 @@ export function normalizeSlug(slug: string[]) {
 
   const hasId = idRegex.test(slug[0]);
 
-  const id = hasId ? slug[0] : null;
+  const id = hasId ? slug[0] : undefined;
 
   return {
     isEditing,

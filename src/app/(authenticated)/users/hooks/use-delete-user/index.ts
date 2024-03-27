@@ -2,12 +2,11 @@ import { createMutation } from "react-query-kit";
 import { toast } from "react-toastify";
 
 import { users } from "@/services/users";
-import { type QueryKey, useQueryClient } from "@tanstack/react-query";
-import { type GetUsersResponse } from "@/services/users/types";
+import type { GetUsersResponse } from "@/services/users/types";
 
-type IProps = {
-  queryKey: QueryKey;
-};
+import { useQueryClient } from "@tanstack/react-query";
+
+import type { IProps } from './types'
 
 export const useDeleteUser = ({ queryKey }: IProps) => {
   const queryClient = useQueryClient();
