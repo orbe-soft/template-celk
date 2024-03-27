@@ -1,0 +1,8 @@
+:root {
+  --toastify-font-family: var(--font-inter);
+  --toastify-text-color-light: var(--cinza-400);
+  --toastify-toast-width: auto;
+  --toastify-toast-background: var(--global-branco);
+  --toastify-toast-min-height: 4rem;
+  --toastify-toast-max-height: 50rem;
+}

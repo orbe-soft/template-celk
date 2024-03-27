@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --azul-100: #d3eef7;
+    --azul-200: #005caa;
+    --azul-300: #0e4195;
+
+    --verde-100: #c8fac8;
+    --verde-200: #009d3d;
+    --verde-300: #004b3b;
+
+    --amarelo-100: #fef8cb;
+    --amarelo-200: #fdc300;
+    --amarelo-300: #b68300;
+
+    --vermelho-100: #fec1a1;
+    --vermelho-200: #f82b11;
+    --vermelho-300: #8f0618;
+
+    --cinza-100: #f1f1f1;
+    --cinza-200: #d2d2d2;
+    --cinza-300: #808080;
+    --cinza-400: #222222;
+
+    --global-branco: #ffffff;
+    --global-preto: #0c0c0c;
+  }
+
+  body {
+    scroll-behavior: smooth;
+    font-family: var(--font-inter);
+  }
+
+  @media screen and (min-width: 580px) {
+    html {
+      font-size: 81.25%;
+    }
+  }
+
+  @media screen and (min-width: 640px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    html {
+      font-size: 100%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: theme("colors.GLOBAL.BRANCO");
+    border-radius: 0.15625rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: theme("colors.CINZA.200");
+    border-radius: 0.15625rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  }
+}
+
+@layer utilities {
+  .border-test {
+    @apply border border-red-600;
+  }
+}
