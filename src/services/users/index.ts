@@ -21,15 +21,15 @@ export const users = {
   },
   async create(createUserData: CreateUserData) {
     const { data: createdUser } = await axios.post<User>(
-      "/user/create",
-      createUserData,
+      "/user",
+      createUserData
     );
     return createdUser;
   },
   async update({ id: userId, ...updateUserData }: UpdateUserData) {
-    const { data: updatedUser } = await axios.put<User>(
+    const { data: updatedUser } = await axios.patch<User>(
       "/user/" + userId,
-      updateUserData,
+      updateUserData
     );
     return updatedUser;
   },

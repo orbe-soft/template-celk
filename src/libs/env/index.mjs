@@ -10,19 +10,19 @@ export const env = createEnv({
     NEXTAUTH_URL: z.string().url(),
     GITHUB_ID: z.string().min(1),
     GITHUB_SECRET: z.string().min(1),
+    CYPRESS_BASE_URL: z.string().url(),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url(),
-    NEXT_PUBLIC_APP_ID: z.string().min(1),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_APP_ID: process.env.NEXT_PUBLIC_APP_ID,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
+    CYPRESS_BASE_URL: process.env.CYPRESS_BASE_URL,
   },
   emptyStringAsUndefined: true,
 });
